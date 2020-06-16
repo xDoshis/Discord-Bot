@@ -24,7 +24,7 @@ class MyClient(discord.Client):
 
     async def my_background_task(self):
         await self.wait_until_ready()
-        channel = self.get_channel(****) # channel ID goes here
+        channel = self.get_channel(***) # channel ID goes here
         join_old = 0
         quit_old = 0
         dead_old = 0
@@ -65,7 +65,7 @@ class MyClient(discord.Client):
                 i = 1
                 while i <= loggedin:
                     text = jsonLineJ[-i].split(" ")
-                    await channel.send("%s %s has logged onto Minecraft :PepeHype:" %(text[0], text[1]))
+                    await channel.send(" %s has logged onto Minecraft!" % text[1])
                     i = i +1
                     
                 join_old = join_new
@@ -73,7 +73,7 @@ class MyClient(discord.Client):
             if join_new < join_old:
                 for element in jsonLineJ:
                     text = jsonLineJ[element].split(" ")
-                    await channel.send("%s %s has logged onto Minecraft :PepeHype:" %(text[0],text[1]))
+                    await channel.send(" %s has logged onto Minecraft!" %text[1])
                 
                 join_old = join_new 
            
@@ -83,7 +83,7 @@ class MyClient(discord.Client):
                 a = 1
                 while a <= loggedout:
                     text = jsonLineQ[-a].split(" ")
-                    await channel.send("%s Boooooo %s logged off :socko:" %(text[0], text[1]))
+                    await channel.send(" Boooooo %s logged off :triumph: " % text[1])
                     a = a +1
     
                 quit_old = quit_new
@@ -92,7 +92,7 @@ class MyClient(discord.Client):
                 for element in jsonlineQ:
                     text = jsonLineQ[element].split(" ")
                     print(text[0])
-                    await channel.send("%s Boooooo %s logged off :socko:" %(text[0], text[1]))
+                    await channel.send(" Boooooo %s logged off :triumph: " %text[1])
 
                 quit_old = quit_new
             
@@ -102,7 +102,7 @@ class MyClient(discord.Client):
                 d = 1
                 while d <= died:
                     text = jsonLineD[-d].split(" ")
-                    await channel.send("%s Can we get an F in chat, %s just died :/" %(text[0],text[1]))
+                    await channel.send(" Can we get an F in chat, %s just died :/" %text[1])
                     await channel.send(jsonLine)
                 
                 dead_old = death_new
@@ -110,7 +110,7 @@ class MyClient(discord.Client):
             if dead_new < dead_old:
                 for element in jsonLineD:
                     text = jsonLined[element].split(" ")
-                    await channel.send("%s the dumbass %s just died :/" %(text[0],text[1]))
+                    await channel.send("The dumbass %s just died :/" %text[1])
 
                 
                 dead_old = dead_new
@@ -123,14 +123,23 @@ class MyClient(discord.Client):
         if message.author == self.user:
             return
 
-        if message.content == 'ping':
-            await message.channel.send('pong')
+        if message.content == '!info':
+            await message.channel.send(
+                """User input: !online \nList of players currently online 
+                \n\nUser input: woosh \nEnjoy a magical fairy cat woosh 
+                \n\nUser input:hello \nTry it and find out""")
 
         if message.content == 'hello':
             await message.channel.send('fuck off :eyes:')
 
         if message.content == 'woosh':
-            await message.channel.send( " ∧＿∧ \n( ･ω･｡)つ━☆・*。\n⊂  ノ    ・゜+.\nしーＪ   °。+ *´¨)\n        .· ´¸.·*´¨) ¸.·*¨)\n        (¸.·´ (¸.·* ☆ ")
+            await message.channel.send( 
+                """∧＿∧ \n
+                  ( ･ω･｡)つ━☆・*。\n
+                  ⊂  ノ    ・゜+.\n
+                  しーＪ   °。+ *´¨)\n
+                          .· ´¸.·*´¨) ¸.·*¨)\n
+                                  (¸.·´ (¸.·* ☆ """)
 
         if message.content == '!online':
             #parse quit file contents into lines
@@ -147,9 +156,10 @@ class MyClient(discord.Client):
 
             if online > 0:
                 on = 1
+                print("These players are online right now:")
                 while on <= online:
                     text = jsonLineJ[-on].split(" ")
-                    await message.channel.send(" %s is online right now!" % text[1])
+                    await message.channel.send("\n%s" % text[1])
                     on = on + 1
             
             else:
@@ -157,7 +167,7 @@ class MyClient(discord.Client):
 
 def ftp_call():
 
-    ftp = ftplib.FTP('***', '***','***') #FTP Server login goes here
+    ftp = ftplib.FTP('***', '***','***') #FTP login goes here
 
     #Get the readme file for Join
     ftp.cwd("/plugins/ServerLog/Activity/Player Join")
@@ -187,4 +197,4 @@ def ftp_call():
 
 
 client = MyClient()
-client.run('***') #bot id goes here
+client.run('***') #bot ID goes here
